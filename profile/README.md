@@ -12,6 +12,14 @@ The best global naming convention for files across Altium, SolidWorks, and C++ p
 - For projects involving multiple configurations or revisions, incorporate those identifiers in filenames.
 - Maintain consistency within a project or directory, even if it means tolerating minor exceptions to rules.
 
+## Git Repositories
+- Use all lowercase letters to avoid case sensitivity issues across platforms.
+- Use hyphens (-) instead of underscores (_) or spaces to separate words for better readability and URL compatibility.
+- Include a prefix for project, team, or product name if managing multiple repos within an organization.
+- Add descriptive terms reflecting the repository contents or technology stack (e.g., frontend, backend, python, react).
+- Keep names concise but informative enough to convey purpose at a glance.
+- Avoid special characters and version numbers in the repo name; rely on version tags/releases instead.
+
 ## Altium Files
 - Avoid spaces and restricted special characters.
 - Use parameters such as ProjectName, PartNumber, and Date in the filename.
