@@ -53,3 +53,11 @@ The best global naming convention for files across Altium, SolidWorks, and C++ p
 - `extension`: file extension for file type
 
 This approach can be adapted to all file types, ensuring names remain unique, discoverable, and informative.
+
+# Part Numbers
+
+SAR-{1}{2}{3}
+
+- {1}: E: Electronics, M: Mechanics, S: Software
+- {2}: First character of the word that describes the purpose or name, e.g., Main board → M
+- {3}: Important information that makes the product distinguishable from similar products
