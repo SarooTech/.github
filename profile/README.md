@@ -1,63 +1,104 @@
-# Naming Principles
-The best global naming convention for files across Altium, SolidWorks, and C++ projects emphasizes clarity, consistency, and avoiding problematic characters, adaptable to each domain's specifics.
+# SarooTech Naming Principles (UIS Edition)
 
-## General Global Naming Principles
-- Use lowercase letters for consistency and ease of search.
-- Separate words with hyphens (-) rather than underscores or spaces, as hyphens improve readability and search engine compatibility.
-- Avoid special characters that can cause errors or compatibility issues: < > : " \ | ? * and spaces should be avoided.
-- Include meaningful descriptors in filenames to capture project, component, type, and version information.
-- Keep filenames concise, ideally under 30 characters, but descriptive enough for identification.
-- Use ISO 8601 format for dates (YYYYMMDD) if dates are included.
-- Version files with clear incremental suffixes like v01, v02.
-- For projects involving multiple configurations or revisions, incorporate those identifiers in filenames.
-- Maintain consistency within a project or directory, even if it means tolerating minor exceptions to rules.
+Unified naming convention integrating **Unified Identification System (UIS)** for global consistency across Git repos, Altium Designer, SolidWorks, C++, Python, folders, and files. **Hyphens (-) everywhere** as the universal separator. **No version numbers**—use Git for versioning (SemVer tags).
 
-## Git Repositories
-- Use all lowercase letters to avoid case sensitivity issues across platforms.
-- Use hyphens (-) instead of underscores (_) or spaces to separate words for better readability and URL compatibility.
-- Include a prefix for project, team, or product name if managing multiple repos within an organization.
-- Add descriptive terms reflecting the repository contents or technology stack (e.g., frontend, backend, python, react).
-- Keep names concise but informative enough to convey purpose at a glance.
-- Avoid special characters and version numbers in the repo name; rely on version tags/releases instead.
+## Core Principles
+- **All lowercase** except **UIS (ALL UPPERCASE)**
+- **Hyphens (-)** only—no underscores, spaces, or special chars (< > : " \ | ? *)
+- **UIS required** for: Git repos, root folders, **all CAD files**, **all Documents**
+- **No UIS** for: code files (C++, Python) only
+- **Max length**: Under 30 chars where possible
 
-## Altium Files
-- Avoid spaces and restricted special characters.
-- Use parameters such as ProjectName, PartNumber, and Date in the filename.
-- A typical pattern: `<ProjectName>-<PartNumber>-<YYYYMMDD>.SchDoc` or `.PcbDoc`.
-- Use no spaces, and stick with hyphens or camel case if needed.
-- Leverage Altium's parameter and variant naming for auto-generated filenames.
+## SarooTech UIS Format
+```
+SAR-[D][T][G?][NNNN]
+```
+- **SAR**: SarooTech company code (UPPERCASE)
+- **D**: Domain (1 char: P=Product, D=Document, S=Software, M=Mechanical)
+- **T**: Type (1 char: E=Electronics, M=Mechanical, S=Software, D=Document)
+- **G**: Group (1 char, optional: C=Component, A=Assembly, etc.)
+- **NNNN**: Sequential 4-digit number (0001, 0002...)
 
-## SolidWorks Files
-- Incorporate company or project abbreviations, part identifiers, and revision numbers.
-- Example pattern: `<CompanyCode>_<FiscalYear>_<ProjectCode>_<PartName>_Rev<Number>.sldprt`
-- Use underscores or hyphens consistently as word separators.
-- Include configuration or display state names in file names for different variants.
-- Keep part names short but descriptive.
+## Correct UIS Examples (Core IDs Only)
+```
+SAR-PEC0001
+SAR-MMC0002
+SAR-DDO0003
+SAR-SSW0004
+```
 
-## C++ Files
-- Name files after primary classes or modules they contain (e.g., `network_manager.cpp` for a NetworkManager class).
-- Use lowercase with underscores or hyphens separating words (e.g., `sensor_reading.cpp`).
-- Avoid spaces and special characters.
-- Use typical extensions `.cpp` for source, `.h` or `.hpp` for headers.
-- Include version or date info if useful, but generally file names focus on content.
-- Follow language-specific conventions for variables and classes within the code but keep filenames simple and clear.
+## Naming by Context
 
-## Example Unified Naming Template
-`<project>-<component>-<description>-<date>-v<version>.<extension>`
+### Git Repositories & Root Folders (UIS Required)
+```
+SAR-PEC0001-identification-system/
+SAR-MMC0002-hardware-platform/
+SAR-DDO0003-user-manual/
+```
 
-- `project`: short project code or company abbreviation
-- `component`: module, part number, or subproject
-- `description`: brief descriptor (e.g., schematic, board, class name)
-- `date`: YYYYMMDD (optional)
-- `version`: v01, v02, etc. (optional)
-- `extension`: file extension for file type
+### Altium Designer (All Files: UIS Required)
+```
+SAR-PEC0001-identification-system.PrjPcb
+SAR-PEC0001-mainboard.PcbDoc
+SAR-PEC0002-connector.SchDoc
+```
 
-This approach can be adapted to all file types, ensuring names remain unique, discoverable, and informative.
+### SolidWorks (All Files: UIS Required)
+```
+SAR-MMC0001-enclosure.sldprt
+SAR-MMC0002-chassis.sldasm
+SAR-MMC0003-bracket.slddrw
+```
 
-# Part Numbers
+### Documents (All Files: UIS Required)
+```
+SAR-DDO0001-api-reference.pdf
+SAR-DDO0002-user-guide.md
+SAR-DDO0003-test-report.docx
+```
 
-SAR-{1}{2}{3}
+### C++ / Python (No UIS)
+```
+SAR-PEC0001-identification-system/           
+├── src/
+│   ├── id-generator.cpp
+│   ├── config-manager.cpp
+│   ├── api-handler.py
+└── tests/
+    ├── test-id-generator.cpp
+    └── test-config.py
+```
 
-- {1}: E: Electronics, M: Mechanics, S: Software
-- {2}: First character of the word that describes the purpose or name, e.g., Main board → M
-- {3}: Important information that makes the product distinguishable from similar products
+## Complete Project Example
+```
+SAR-PEC0001-identification-system/
+├── SAR-PEC0001-identification-system.PrjPcb
+│   ├── SAR-PEC0001-mainboard.PcbDoc
+│   └── SAR-PEC0002-connector.SchDoc
+├── SAR-MMC0001-enclosure.sldprt
+├── SAR-DDO0001-api-reference.pdf
+├── src/
+│   ├── id-generator.cpp
+│   └── config-manager.cpp
+```
+
+## Quick Rules Summary
+| Context | UIS Required? | Pattern | Case | Separator |
+|---------|---------------|---------|------|-----------|
+| **Git Repos/Root** | ✅ | `SAR-[DTG][NNNN]-[purpose]` | UIS UPPER, purpose lower | Hyphen (-) |
+| **CAD Files** | ✅ | `SAR-[DTG][NNNN]-[purpose].[ext]` | UIS UPPER, purpose lower | Hyphen (-) |
+| **Documents** | ✅ | `SAR-DDO[NNNN]-[purpose].[ext]` | UIS UPPER, purpose lower | Hyphen (-) |
+| **Code Files** | ❌ | `descriptive.ext` | All lower | Hyphen (-) |
+
+## Why This Works
+- **Visual Hierarchy**: `SAR-PEC0001-identification-system` (UPPER UIS + lower purpose)
+- **Real-world Traceability**: Every physical/CAD/document artifact gets unique UIS
+- **Clean Code**: Software files stay simple/readable
+- **100% Hyphen Consistency** across all domains
+- **Git Versioning**: `git tag v1.2.3`
+
+**Rule**: **UIS (UPPERCASE) for all real-world/physical artifacts (CAD, docs). No UIS for pure software code files.**
+
+*Last Updated: Dec 2025*[1]
+
+[1](https://github.com/SarooTech)
